@@ -51,22 +51,21 @@ var geoSettings = {
 
 navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
 
-// navigator.permissions.query({name:'geolocation'}).then(function(result) {
-//   console.log(result);
-//   if (result.state == 'granted') {
-//     console.log(result);
-//     geoBtn.style.display = 'none';
-//   } else if (result.state == 'prompt') {
-    
-//   } else if (result.state == 'denied') {
-//     geoBtn.style.display = 'inline';
-//     geoBtn.onclick = function() {
-//       navigator.permissions.request({name:'geolocation'}).then(function(result) {
-//       });
-//     }
-//   }
+navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  console.log(result);
+  if (result.state == 'granted') {
+    console.log(result);
+    geoBtn.style.display = 'none';
+  } else if (result.state == 'prompt') {
+    navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+  } else if (result.state == 'denied') {
+    geoBtn.style.display = 'inline';
+    geoBtn.onclick = function() {
+      console.log('Permission currently denied; future features of the Permissions API wil allows us to fix this.')
+    }
+  }
 
-//   result.onchange = function() {
-//     console.log(result);
-//   }
-// });
+  result.onchange = function() {
+    console.log(result);
+  }
+});
