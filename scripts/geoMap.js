@@ -49,23 +49,22 @@ var geoSettings = {
 
 // Start everything off
 
-navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
-
+function handlePermission() {
 navigator.permissions.query({name:'geolocation'}).then(function(result) {
-  console.log(result);
   if (result.state == 'granted') {
     console.log(result);
     geoBtn.style.display = 'none';
   } else if (result.state == 'prompt') {
+    console.log(result);
     navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
   } else if (result.state == 'denied') {
+    console.log(result);
     geoBtn.style.display = 'inline';
     geoBtn.onclick = function() {
       console.log('Permission currently denied; future features of the Permissions API wil allows us to fix this.')
     }
   }
-
-  result.onchange = function() {
-    console.log(result);
-  }
 });
+}
+
+handlePermission();
