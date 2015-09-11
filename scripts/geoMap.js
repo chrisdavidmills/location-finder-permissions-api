@@ -51,22 +51,22 @@ var geoSettings = {
 
 navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
 
-navigator.permissions.query({name:'geolocation'}).then(function(result) {
-  console.log(result);
-  if (result.state == 'granted') {
-    console.log(result);
-    geoBtn.style.display = 'none';
-  } else if (result.state == 'prompt') {
+// navigator.permissions.query({name:'geolocation'}).then(function(result) {
+//   console.log(result);
+//   if (result.state == 'granted') {
+//     console.log(result);
+//     geoBtn.style.display = 'none';
+//   } else if (result.state == 'prompt') {
     
-  } else if (result.state == 'denied') {
-    geoBtn.style.display = 'inline';
-    geoBtn.onclick = function() {
-      navigator.permissions.request({name:'geolocation'}).then(function(result) {
-      });
-    }
-  }
+//   } else if (result.state == 'denied') {
+//     geoBtn.style.display = 'inline';
+//     geoBtn.onclick = function() {
+//       navigator.permissions.request({name:'geolocation'}).then(function(result) {
+//       });
+//     }
+//   }
 
-  result.onchange = function() {
-    console.log(result);
-  }
-});
+//   result.onchange = function() {
+//     console.log(result);
+//   }
+// });
