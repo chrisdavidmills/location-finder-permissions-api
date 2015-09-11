@@ -49,19 +49,25 @@ var geoSettings = {
 function handlePermission() {
   navigator.permissions.query({name:'geolocation'}).then(function(result) {
     if (result.state == 'prompt') {
-      console.log(result.state);
+      report(result.state);
       navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
     } else if (result.state == 'denied') {
-      console.log(result.state);
+      report(result.state);
       geoBtn.style.display = 'inline';
       geoBtn.onclick = function() {
-        console.log('Permission currently denied; future features of the Permissions API will allow us to fix this.')
+        console.log('Permission currently denied; future features of the Permissions API will allow us to request permission here.')
+        console.log('Currently you have to reset the permission state using the browser UI.')
+        console.log('In Firefox it is done with Tools > Page Info > Permissions > Access Your Location.')
       }
     }
     result.onchange = function() {
-      console.log('Permission changed to ' + result.state);
+      report(result.state);
     }
   });
+}
+
+function report(state) {
+  console.log('Permission ' + state);
 }
 
 handlePermission();
