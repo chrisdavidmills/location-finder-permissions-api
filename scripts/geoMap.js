@@ -8,7 +8,6 @@ var geoBtn = document.querySelector('button');
   
 var positionDenied = function() {
   console.log('permission denied');
-  
 };
   
 var revealPosition = function(position) {
@@ -57,7 +56,8 @@ navigator.permissions.query({name:'geolocation'}).then(function(result) {
   } else if (result.state == 'denied') {
     geoBtn.style.display = 'inline';
     geoBtn.onclick = function() {
-      navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+      navigator.permissions.request({name:'geolocation'}).then(function(result) {
+      });
     }
   }
 
