@@ -8,9 +8,14 @@ var geoBtn = document.querySelector('button');
   
 var positionDenied = function() {
   console.log('permission denied');
+  geoBtn.style.display = 'inline';
+  geoBtn.onclick = function() {
+    navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+  }
 };
   
 var revealPosition = function(position) {
+  geoBtn.style.display = 'none';
   var markerTitle = "You are here";
 
   var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
