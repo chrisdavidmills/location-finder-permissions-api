@@ -8,6 +8,7 @@ var geoBtn = document.querySelector('button');
   
 var positionDenied = function() {
   console.log('permission denied');
+  
 };
   
 var revealPosition = function(position) {
