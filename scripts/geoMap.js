@@ -48,6 +48,9 @@ var geoSettings = {
 
 function handlePermission() {
   navigator.permissions.query({name:'geolocation'}).then(function(result) {
+    if (result.state == 'granted') {
+      report(result.state);
+      geoBtn.style.display = 'none';
     if (result.state == 'prompt') {
       report(result.state);
       navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
