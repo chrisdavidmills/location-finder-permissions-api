@@ -51,7 +51,7 @@ function handlePermission() {
     if (result.state == 'granted') {
       report(result.state);
       geoBtn.style.display = 'none';
-    } if (result.state == 'prompt') {
+    } else if (result.state == 'prompt') {
       report(result.state);
       navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
     } else if (result.state == 'denied') {
