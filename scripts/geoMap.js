@@ -2,12 +2,16 @@
 
 var mapCanvas = document.getElementById('map_canvas');
 var geoBtn = document.querySelector('button');
+geoBtn.onclick = function() {
+  console.log('Permission currently denied; future features of the Permissions API will allow us to request permission here.')
+  console.log('Currently you have to reset the permission state using the browser UI.')
+  console.log('In Firefox it is done with Tools > Page Info > Permissions > Access Your Location.')
+}
 
 // draw the google map, or not
 
   
 var positionDenied = function() {
-  console.log('permission denied');
   geoBtn.style.display = 'inline';
 };
   
@@ -57,11 +61,6 @@ function handlePermission() {
     } else if (result.state == 'denied') {
       report(result.state);
       geoBtn.style.display = 'inline';
-      geoBtn.onclick = function() {
-        console.log('Permission currently denied; future features of the Permissions API will allow us to request permission here.')
-        console.log('Currently you have to reset the permission state using the browser UI.')
-        console.log('In Firefox it is done with Tools > Page Info > Permissions > Access Your Location.')
-      }
     }
     result.onchange = function() {
       report(result.state);
