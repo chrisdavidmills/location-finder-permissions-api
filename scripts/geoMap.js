@@ -9,9 +9,6 @@ var geoBtn = document.querySelector('button');
 var positionDenied = function() {
   console.log('permission denied');
   geoBtn.style.display = 'inline';
-  geoBtn.onclick = function() {
-    navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
-  }
 };
   
 var revealPosition = function(position) {
@@ -50,21 +47,21 @@ var geoSettings = {
 // Start everything off
 
 function handlePermission() {
-navigator.permissions.query({name:'geolocation'}).then(function(result) {
-  if (result.state == 'granted') {
-    console.log(result);
-    geoBtn.style.display = 'none';
-  } else if (result.state == 'prompt') {
-    console.log(result);
-    navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
-  } else if (result.state == 'denied') {
-    console.log(result);
-    geoBtn.style.display = 'inline';
-    geoBtn.onclick = function() {
-      console.log('Permission currently denied; future features of the Permissions API wil allows us to fix this.')
+  navigator.permissions.query({name:'geolocation'}).then(function(result) {
+    if (result.state == 'prompt') {
+      console.log(result.state);
+      navigator.geolocation.getCurrentPosition(revealPosition,positionDenied,geoSettings);
+    } else if (result.state == 'denied') {
+      console.log(result.state);
+      geoBtn.style.display = 'inline';
+      geoBtn.onclick = function() {
+        console.log('Permission currently denied; future features of the Permissions API will allow us to fix this.')
+      }
     }
-  }
-});
+    result.onchange = function() {
+      console.log('Permission changed to ' + result.state);
+    }
+  });
 }
 
 handlePermission();
