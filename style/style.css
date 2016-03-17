@@ -36,10 +36,7 @@ h1 {
 }
 
 button {
-  display: none;
   position: absolute;
-  top: 0.3rem;
-  right: 0.5rem;
   height: 4.1rem;
   border-radius: 5px;
   background: url("../img/default.png") repeat-x scroll left bottom / auto 100% rgb(250, 250, 250); 
@@ -53,6 +50,16 @@ button {
   text-shadow: 0.1rem 0.1rem 0px rgba(255, 255, 255, 0.3);
   text-decoration: none;
   outline: medium none;
+}
+
+.enable {
+  top: 0.3rem;
+  right: 17.4rem;
+}
+
+.revoke {
+  top: 0.3rem;
+  right: 0.4rem;
 }
 
 @media (max-width: 380px) {

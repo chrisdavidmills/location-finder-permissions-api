@@ -1,11 +1,16 @@
 // set up the page
 
 var mapCanvas = document.getElementById('map_canvas');
-var geoBtn = document.querySelector('button');
+var geoBtn = document.querySelector('.enable');
+var revokeBtn = document.querySelector('.revoke');
 geoBtn.onclick = function() {
   console.log('Permission currently denied; future features of the Permissions API will allow us to request permission here.')
   console.log('Currently you have to reset the permission state using the browser UI.')
   console.log('In Firefox it is done with Tools > Page Info > Permissions > Access Your Location.')
+}
+
+revokeBtn.onclick = function() {
+  revokePermission();
 }
 
 // draw the google map, or not
@@ -68,8 +73,14 @@ function handlePermission() {
   });
 }
 
+function revokePermission() {
+  navigator.permissions.revoke({name:'geolocation'}).then(function(result) {
+    report(result.state);
+  });
+}
+
 function report(state) {
-  console.log('Permission ' + state);
+  console.log('Permission: ' + state);
 }
 
 handlePermission();
